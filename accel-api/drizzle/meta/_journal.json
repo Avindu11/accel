@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1778038614805,
+      "tag": "0000_young_living_lightning",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1778039414341,
+      "tag": "0001_organic_pixie",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1778039577894,
+      "tag": "0002_careless_warlock",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1778039822626,
+      "tag": "0003_regular_charles_xavier",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1778040994751,
+      "tag": "0004_colorful_onslaught",
+      "breakpoints": true
+    }
+  ]
+}

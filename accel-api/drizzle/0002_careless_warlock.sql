@@ -1,0 +1,1 @@
+ALTER TABLE `tokens` ADD `expires_at` datetime NOT NULL;
