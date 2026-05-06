@@ -51,13 +51,13 @@ export async function signUp(userInfo: UserInfo) {
         })
 
         const accessToken = jwt.sign(
-            { user: newUser },
+            { userId: newUser.users.id },
             config.JWT_SECRET!,
             { expiresIn: '60s' }
         )
 
         const refreshToken = jwt.sign(
-            { user: newUser },
+            { userId: newUser.users.id },
             config.JWT_SECRET!,
             { expiresIn: '1h' }
         )
@@ -97,13 +97,13 @@ export async function signIn(signInPayload: SignInPayload) {
         }
 
         const accessToken = jwt.sign(
-            { user: checkUser[0] },
+            { userId: checkUser[0].users.id },
             config.JWT_SECRET!,
             { expiresIn: '60s' }
         )
 
         const refreshToken = jwt.sign(
-            { user: checkUser[0] },
+            { userId: checkUser[0].users.id },
             config.JWT_SECRET!,
             { expiresIn: '1h' }
         )
