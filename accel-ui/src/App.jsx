@@ -5,11 +5,16 @@ import SalesDashboard from "./views/sales/SalesDashboard";
 import AdminLayout from "./layouts/AdminLayout";
 import SalesLayout from "./layouts/SalesLayout";
 import ProtectedRoute from "./context/ProtectedRoute";
-import { AuthProvider } from "./context/AuthContext";
+import { useAuth } from "./context/AuthContext";
 import SignIn from "./views/auth/SignIn";
 import AdminRoute from "./context/AdminRoute";
+import Leads from "./views/sales/Leads";
+import AddLead from "./views/sales/AddLead";
+import ViewLead from "./views/sales/ViewLead";
+import EditLead from "./views/sales/EditLead";
 
 function App() {
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -45,15 +50,29 @@ function App() {
       children: [
         { index: true, element: <SalesDashboard /> },
         { path: "dashboard", element: <SalesDashboard /> },
+        {
+          path: "leads",
+          element: <Leads />,
+        },
+        {
+          path: "leads/add",
+          element: <AddLead />,
+        },
+        {
+          path: "leads/view/:id",
+          element: <ViewLead />,
+        },
+        {
+          path: "leads/edit/:id",
+          element: <EditLead />,
+        },
       ],
     },
   ]);
 
   return (
     <>
-      <AuthProvider>
         <RouterProvider router={router} />
-      </AuthProvider>
     </>
   );
 }

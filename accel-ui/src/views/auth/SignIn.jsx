@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router";
 
 function SignIn() {
+  
   const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({
@@ -16,6 +17,8 @@ function SignIn() {
     e.preventDefault();
     
     const response = await login(credentials.email, credentials.password);
+
+    console.log(response)
 
     if (response === "admin") navigate("/admin");
     if (response === "sales") navigate("/sales");

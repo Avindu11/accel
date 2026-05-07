@@ -44,9 +44,10 @@ export const adminsTable = mysqlTable("admin", {
 export const leadsTable = mysqlTable("leads", {
     id: int("id").primaryKey().autoincrement(),
     name: varchar("name", { length: 255 }).notNull(),
-    companyName: varchar("company_name", { length: 255 }).notNull(),
+    companyName: varchar("company_name", { length: 255 }),
     email: varchar("email", { length: 255 }).notNull(),
     phoneNumber: varchar("phone_number", { length: 255 }).notNull(),
+    leadSource: varchar("lead_source", { length: 255 }).notNull(),
     salesPersonId: int("sales_person_id").notNull().references(() => salesPersonsTable.id),
     status: mysqlEnum("status", ["new", "contacted", "qualified", "proposal sent", "won", "lost"]).notNull(),
     estDealValue: decimal("est_deal_value", { precision: 10, scale: 2 }).notNull(),

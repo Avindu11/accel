@@ -7,7 +7,7 @@ function AdminRoute({ children }) {
 
   if (!user) return <Navigate to="/login" />;
 
-  if (user.admin.status != 1) return <Navigate to="/forbidden" />;
+  if (user.user.admin.status != 1) return <Navigate to="/forbidden" />;
 
   return children;
   

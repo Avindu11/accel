@@ -55,7 +55,7 @@ export async function signUp(userInfo: UserInfo) {
         const accessToken = jwt.sign(
             { userId: newUser.users.id },
             config.JWT_SECRET!,
-            { expiresIn: '60s' }
+            { expiresIn: '45m' }
         )
 
         const refreshToken = jwt.sign(
@@ -101,7 +101,7 @@ export async function signIn(signInPayload: SignInPayload) {
         const accessToken = jwt.sign(
             { userId: checkUser[0].users.id },
             config.JWT_SECRET!,
-            { expiresIn: '60s' }
+            { expiresIn: '45m' }
         )
 
         const refreshToken = jwt.sign(

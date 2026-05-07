@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { axiosInstance } from "../api/axiosInstance";
-import { useNavigate } from "react-router";
 
 const AuthContext = createContext(null);
 
@@ -39,7 +38,8 @@ export const AuthProvider = ({ children }) => {
       if (res.status == 200) {
 
         setUser(res.data.user)
-        const stringify = JSON.stringify(res.data.user);
+        setAccessToken(res.data.accessToken)
+        const stringify = JSON.stringify(res.data);
         localStorage.setItem("accel-auth", stringify);
         toast("Signed in successfully");
 

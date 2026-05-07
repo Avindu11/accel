@@ -1,10 +1,11 @@
 import express from 'express'
 import { authenticate, authorize } from '../../middleware/auth'
 
+import * as leadController from "../../controllers/lead.controller"
+
 const router = express.Router()
 
-router.get('/test', authenticate(), authorize('admin'), (req, res) => {
-    res.send('Hello admin')
-})
+router.get('/', authenticate(), leadController.getLeads)
+router.post('/', authenticate(), leadController.addLead)
 
 export default router

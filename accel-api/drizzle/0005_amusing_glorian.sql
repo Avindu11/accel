@@ -1,0 +1,1 @@
+ALTER TABLE `leads` ADD `lead_source` varchar(255) NOT NULL;

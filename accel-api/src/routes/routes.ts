@@ -6,6 +6,6 @@ import leadRoutes from "./v1/lead.route"
 const apiRouter = express.Router()
 
 apiRouter.use("/v1/auth", authRoutes)
-apiRouter.use('/v1/lead', leadRoutes)
+apiRouter.use('/v1/leads', leadRoutes)
 
 export default apiRouter;
