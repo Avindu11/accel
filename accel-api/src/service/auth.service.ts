@@ -42,6 +42,8 @@ export async function signUp(userInfo: UserInfo) {
                 await tx.insert(adminsTable).values({ status: 1, userId: userAdd[0].id })
             }
 
+            const salesPersonAdd = await tx.insert(salesPersonsTable).values({ status: 1, userId: userAdd[0].id })
+
             const newUser = await tx.select().from(usersTable).where(eq(usersTable.id, userAdd[0].id))
                 .leftJoin(adminsTable, eq(usersTable.id, adminsTable.userId))
                 .leftJoin(salesPersonsTable, eq(usersTable.id, salesPersonsTable.userId));
