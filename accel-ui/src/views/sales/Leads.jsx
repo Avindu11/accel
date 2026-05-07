@@ -1,9 +1,10 @@
-import { Pen, Plus, Search, Trash } from "lucide-react";
+import { Eye, Pen, Plus, Search, Trash } from "lucide-react";
 import { Link } from "react-router";
 import { leadSources, leadStatuses } from "../../constants/constants";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../../api/axiosInstance";
 import { useAuth } from "../../context/AuthContext";
+import { toast } from "react-toastify";
 
 function Leads() {
   const [params, setParams] = useState({
@@ -28,6 +29,32 @@ function Leads() {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async function deleteLead(id) {
+
+    try {
+      
+      const confirm = window.confirm(`Are you sure to delete lead: ${id} ?`)
+
+      if (confirm) {
+
+        const api = await axiosInstance(accessToken)
+        const res = await api.delete(`/v1/leads/${id}`)
+
+        if (res.status === 204) {
+          toast('Lead Deleted successfully')
+          fetchLeads()
+        }
+
+      }
+
+    } catch (error) {
+      
+      console.log(error)
+
+    }
+
   }
 
   useEffect(() => {
@@ -135,7 +162,7 @@ function Leads() {
                 <th className="px-4 py-3">Phone Number</th>
                 <th className="px-4 py-3">Est. Deal Value</th>
                 <th className="px-4 py-3">Status</th>
-                <th className="px-4 py-3 text-right">Actions</th>
+                <th className="px-4 py-3">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -168,11 +195,19 @@ function Leads() {
                       <Pen size={18} />
                     </Link>
                     <button
+                      onClick={() => deleteLead(lead.id)}
                       className="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
                       title="Delete"
                     >
                       <Trash size={18} />
                     </button>
+                    <Link
+                      to={`view/${lead.id}`}
+                      className="p-1.5 text-gray-500 hover:text-orange-600 hover:bg-orange-50 rounded-md transition-colors"
+                      title="Edit"
+                    >
+                      <Eye size={18} />
+                    </Link>
                   </td>
                 </tr>
               ))}

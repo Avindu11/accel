@@ -17,7 +17,7 @@ interface queryPayload {
     search: string; searchBy: string, source: string, status: "new" | "contacted" | "qualified" | "proposal sent" | "won" | "lost"
 }
 
-export async function getLeads(query:queryPayload) {
+export async function getLeads(query: queryPayload) {
 
     try {
 
@@ -66,6 +66,28 @@ export async function getLeads(query:queryPayload) {
 
 }
 
+export async function getLeadById(id: number) {
+
+    try {
+
+        const lead = await db.select().from(leadsTable).where(eq(leadsTable.id, id))
+
+        if (!lead[0]) {
+
+            throw new ApiError(`No lead found with id: ${id}`, 404)
+
+        }
+
+        return lead[0]
+
+    } catch (error: any | ApiError) {
+
+        throw new ApiError(error.message || "Failed to add Lead", 500)
+
+    }
+
+}
+
 export async function addLead(userId: number, leadPayload: leadPayload) {
 
     try {
@@ -81,6 +103,54 @@ export async function addLead(userId: number, leadPayload: leadPayload) {
         const newLead = db.insert(leadsTable).values({ name, companyName, email, phoneNumber, leadSource, status, estDealValue, salesPersonId: salesPerson[0].id })
 
         return newLead
+
+    } catch (error: any | ApiError) {
+
+        throw new ApiError(error.message || "Failed to add Lead", 500)
+
+    }
+
+}
+
+export async function updateLead(leadId: number, leadPayload: leadPayload) {
+
+    try {
+
+        const { name, companyName, email, phoneNumber, leadSource, status, estDealValue } = leadPayload
+
+        const checkLead = await db.select().from(leadsTable).where(eq(leadsTable.id, leadId))
+
+        if (!checkLead[0]) {
+
+            throw new ApiError(`No lead found with id: ${leadId}`, 404)
+
+        }
+
+        const update = await db.update(leadsTable).set({ name, companyName, email, phoneNumber, leadSource, status, estDealValue }).where(eq(leadsTable.id, leadId))
+
+        return update
+
+    } catch (error: any | ApiError) {
+
+        throw new ApiError(error.message || "Failed to add Lead", 500)
+
+    }
+
+}
+
+export async function deleteLead(leadId: number) {
+
+    try {
+
+        const checkLead = await db.select().from(leadsTable).where(eq(leadsTable.id, leadId))
+
+        if (!checkLead[0]) {
+            throw new ApiError(`No lead found with id: ${leadId}`, 404)
+        }
+
+        const deleteLead = await db.delete(leadsTable).where(eq(leadsTable.id, leadId))
+
+        return deleteLead
 
     } catch (error: any | ApiError) {
 

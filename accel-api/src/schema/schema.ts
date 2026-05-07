@@ -55,7 +55,10 @@ export const leadsTable = mysqlTable("leads", {
 
 export const leadNotesTable = mysqlTable("lead_notes", {
     id: int("id").primaryKey().autoincrement(),
-    leadId: int("lead_id").notNull().references(() => leadsTable.id),
+    leadId: int("lead_id").notNull().references(() => leadsTable.id, {
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
+    }),
     content: text("content").notNull(),
     addedBy: int("added_by").notNull().references(() => usersTable.id),
 })
