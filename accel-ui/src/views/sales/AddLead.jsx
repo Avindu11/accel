@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { leadSources, leadStatuses } from "../../constants/constants";
 import { axiosInstance } from "../../api/axiosInstance";
 import { useAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 function AddLead() {
   const { accessToken } = useAuth();
@@ -77,7 +77,6 @@ function AddLead() {
 
       <form className="space-y-6" onSubmit={handleAddLead}>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {/* Name */}
           <div>
             <label
               htmlFor="name"
@@ -98,7 +97,6 @@ function AddLead() {
             />
           </div>
 
-          {/* Company Name */}
           <div>
             <label
               htmlFor="companyName"
@@ -118,7 +116,6 @@ function AddLead() {
             />
           </div>
 
-          {/* Email Address */}
           <div>
             <label
               htmlFor="email"
@@ -139,7 +136,6 @@ function AddLead() {
             />
           </div>
 
-          {/* Phone Number */}
           <div>
             <label
               htmlFor="phoneNumber"
@@ -214,7 +210,6 @@ function AddLead() {
             </select>
           </div>
 
-          {/* Estimated Deal Value (Full Width) */}
           <div className="sm:col-span-2">
             <label
               htmlFor="estValue"
@@ -244,12 +239,13 @@ function AddLead() {
         </div>
 
         <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-100">
-          <button
+          <Link
+            to={-1}
             type="button"
             className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors"
           >
             Cancel
-          </button>
+          </Link>
           <button
             type="submit"
             className="px-6 py-2 text-sm font-medium text-white bg-orange-500 rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors"

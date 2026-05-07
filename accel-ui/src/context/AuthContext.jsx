@@ -28,6 +28,7 @@ export const AuthProvider = ({ children }) => {
 
   async function login(email, password) {
     try {
+
       const axios = axiosInstance();
 
       const res = await axios.post("/v1/auth/sign-in", {
@@ -39,7 +40,16 @@ export const AuthProvider = ({ children }) => {
 
         setUser(res.data.user)
         setAccessToken(res.data.accessToken)
-        const stringify = JSON.stringify(res.data);
+
+        const authObject = {
+          user: res.data.user.users,
+          admin: res.data.user.admin,
+          salesPerson: res.data.user.sales_person,
+          accessToken: res.data.accessToken,
+          refreshToken: res.data.refreshToken
+        }
+
+        const stringify = JSON.stringify(authObject);
         localStorage.setItem("accel-auth", stringify);
         toast("Signed in successfully");
 
