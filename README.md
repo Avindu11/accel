@@ -41,7 +41,7 @@ git clone https://github.com/Avindu11/accel.git
 4. Create an `.env` file at `accel-ui/`
 
 ```
-VITE_BASE_URL=http://localhost:4100/api
+VITE_BASE_URL=http://localhost:{PORT}/api
 ```
 
 5. open terminal (backend) and run:
