@@ -106,7 +106,7 @@ Database creation and seeding is handled by Drizzle ORM. Please check for databa
 
 ## DEMO Video URL
 
-[Project Demonstration Video]: https://youtu.be/pUK554x_Lvc
+https://youtu.be/pUK554x_Lvc
 
 ## Reflection
 
