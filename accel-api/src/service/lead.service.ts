@@ -14,14 +14,14 @@ interface leadPayload {
 }
 
 interface queryPayload {
-    search: string; searchBy: string, source: string, status: "new" | "contacted" | "qualified" | "proposal sent" | "won" | "lost"
+    search: string; searchBy: string, source: string, status: "new" | "contacted" | "qualified" | "proposal sent" | "won" | "lost", salesPerson: string
 }
 
 export async function getLeads(query: queryPayload) {
 
     try {
 
-        const { search, searchBy, source, status } = query;
+        const { search, searchBy, source, status, salesPerson } = query;
 
         const conditions = []
 
@@ -31,6 +31,10 @@ export async function getLeads(query: queryPayload) {
 
         if (source) {
             conditions.push(eq(leadsTable.leadSource, source))
+        }
+
+        if (salesPerson) {
+            conditions.push(eq(leadsTable.salesPersonId, Number(salesPerson)))
         }
 
         if (search && searchBy) {
@@ -158,8 +162,6 @@ export async function getLeadsSummaryOfSalesPerson(userId: number) {
             throw new ApiError(`No sales person exists`, 404)
         }
 
-        // const summary = await db.select().from(leadsTable).where(eq(leadsTable.salesPersonId, salesPerson[0].id))
-
         const [summary] = await db.select({
             totalLeads: count(),
             totalEstDealValue: sum(leadsTable.estDealValue).mapWith(Number),
@@ -169,6 +171,30 @@ export async function getLeadsSummaryOfSalesPerson(userId: number) {
             lostLeads: sql<number>`SUM(CASE WHEN ${leadsTable.status} = 'lost' THEN 1 ELSE 0 END)`.mapWith(Number),
             totalValueWonDeals: sql<number>`SUM(CASE WHEN ${leadsTable.status} = 'won' THEN ${leadsTable.estDealValue} ELSE 0 END)`.mapWith(Number)
         }).from(leadsTable).where(eq(leadsTable.salesPersonId, salesPerson[0].id))
+
+        return summary
+
+    } catch (error: any | ApiError) {
+
+        throw new ApiError(error.message || "Failed to fetch Leads summary", 500)
+
+    }
+
+}
+
+export async function getLeadsSummary() {
+
+    try {
+
+        const [summary] = await db.select({
+            totalLeads: count(),
+            totalEstDealValue: sum(leadsTable.estDealValue).mapWith(Number),
+            newLeads: sql<number>`SUM(CASE WHEN ${leadsTable.status} = 'new' THEN 1 ELSE 0 END)`.mapWith(Number),
+            qualifiedLeads: sql<number>`SUM(CASE WHEN ${leadsTable.status} = 'qualified' THEN 1 ELSE 0 END)`.mapWith(Number),
+            wonLeads: sql<number>`SUM(CASE WHEN ${leadsTable.status} = 'won' THEN 1 ELSE 0 END)`.mapWith(Number),
+            lostLeads: sql<number>`SUM(CASE WHEN ${leadsTable.status} = 'lost' THEN 1 ELSE 0 END)`.mapWith(Number),
+            totalValueWonDeals: sql<number>`SUM(CASE WHEN ${leadsTable.status} = 'won' THEN ${leadsTable.estDealValue} ELSE 0 END)`.mapWith(Number)
+        }).from(leadsTable)
 
         return summary
 

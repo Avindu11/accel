@@ -14,6 +14,7 @@ import ViewLead from "./views/sales/ViewLead";
 import EditLead from "./views/sales/EditLead";
 import AddNote from "./views/sales/AddNote";
 import EditNote from "./views/sales/EditNote";
+import AdminLeads from "./views/admin/AdminLeads";
 
 function App() {
   const router = createBrowserRouter([
@@ -39,6 +40,7 @@ function App() {
       children: [
         { index: true, element: <AdminDashboard /> },
         { path: "dashboard", element: <AdminDashboard /> },
+        { path: "leads", element: <AdminLeads/> }
       ],
     },
     {
