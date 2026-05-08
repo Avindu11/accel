@@ -6,10 +6,9 @@ import { leadSources, leadStatuses } from "../../constants/constants";
 import { toast } from "react-toastify";
 
 function EditLead() {
-
   const { id } = useParams();
   const { accessToken } = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [lead, setLead] = useState({
     companyName: "",
@@ -28,16 +27,19 @@ function EditLead() {
       const res = await api.get(`/v1/leads/${id}`);
 
       if (res.status === 200) {
+        
+        const { leads } = res.data;
+
         setLead((l) => ({
           ...l,
-          companyName: res.data.companyName,
-          email: res.data.email,
-          estDealValue: res.data.estDealValue,
-          leadSource: res.data.leadSource,
-          name: res.data.name,
-          phoneNumber: res.data.phoneNumber,
-          salesPersonId: res.data.salesPersonId,
-          status: res.data.status,
+          companyName: leads.companyName,
+          email: leads.email,
+          estDealValue: leads.estDealValue,
+          leadSource: leads.leadSource,
+          name: leads.name,
+          phoneNumber: leads.phoneNumber,
+          salesPersonId: leads.salesPersonId,
+          status: leads.status,
         }));
       }
     } catch (error) {
@@ -64,29 +66,25 @@ function EditLead() {
     }
 
     try {
-
       const api = axiosInstance(accessToken);
       const res = await api.put(`/v1/leads/${id}`, lead);
 
       if (res.status === 200) {
-
-        toast('Lead updated successfully')
+        toast("Lead updated successfully");
         setLead((l) => ({
           ...l,
-          companyName: '',
-          email: '',
-          estDealValue: '',
-          leadSource: '',
-          name: '',
-          phoneNumber: '',
-          salesPersonId: '',
-          status: '',
+          companyName: "",
+          email: "",
+          estDealValue: "",
+          leadSource: "",
+          name: "",
+          phoneNumber: "",
+          salesPersonId: "",
+          status: "",
         }));
 
-        navigate(-1)
-
+        navigate(-1);
       }
-
     } catch (error) {
       console.log(error);
     }

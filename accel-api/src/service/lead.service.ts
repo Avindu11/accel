@@ -1,6 +1,6 @@
 import { and, eq, like } from "drizzle-orm";
 import db from "../db";
-import { leadsTable, salesPersonsTable } from "../schema/schema";
+import { leadNotesTable, leadsTable, salesPersonsTable } from "../schema/schema";
 import ApiError from "../util/ApiError";
 
 interface leadPayload {
@@ -66,11 +66,71 @@ export async function getLeads(query: queryPayload) {
 
 }
 
+export async function getLeadsOfSalesPerson(userId: number, query: queryPayload) {
+
+    try {
+
+        const { search, searchBy, source, status } = query;
+
+        const salesPerson = await db.select().from(salesPersonsTable).where(eq(salesPersonsTable.userId, userId))
+
+        if (!salesPerson[0] || salesPerson[0].status !== 1) {
+
+            throw new ApiError('User is not authorized to perform this action', 403)
+
+        }
+
+        const conditions = []
+
+        conditions.push(eq(leadsTable.salesPersonId, salesPerson[0].id))
+
+        if (status) {
+            conditions.push(eq(leadsTable.status, status))
+        }
+
+        if (source) {
+            conditions.push(eq(leadsTable.leadSource, source))
+        }
+
+        if (search && searchBy) {
+
+            let searchColumn;
+
+            switch (searchBy) {
+                case 'name':
+                    searchColumn = leadsTable.name;
+                    break;
+                case 'email':
+                    searchColumn = leadsTable.email;
+                    break;
+                case 'company':
+                    searchColumn = leadsTable.companyName;
+                    break;
+                default:
+                    searchColumn = leadsTable.name;
+            }
+
+            conditions.push(like(searchColumn, `%${search}%`))
+
+        }
+
+        const leads = await db.select().from(leadsTable).where(conditions.length > 0 ? and(...conditions) : undefined)
+        return leads;
+
+    } catch (error: any | ApiError) {
+
+        throw new ApiError(error.message || "Failed fetch leads", 500)
+
+    }
+
+}
+
 export async function getLeadById(id: number) {
 
     try {
 
         const lead = await db.select().from(leadsTable).where(eq(leadsTable.id, id))
+            .leftJoin(leadNotesTable, eq(leadsTable.id, leadNotesTable.leadId))
 
         if (!lead[0]) {
 

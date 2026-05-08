@@ -50,6 +50,13 @@
       "when": 1778157817030,
       "tag": "0006_ancient_fixer",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1778211757015,
+      "tag": "0007_icy_silver_sable",
+      "breakpoints": true
     }
   ]
 }

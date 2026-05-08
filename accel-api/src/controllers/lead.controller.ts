@@ -10,6 +10,13 @@ export const getLeads = expressAsyncHandler(async (req: any, res: Response) => {
 
 })
 
+export const getLeadsOfSalesPerson = expressAsyncHandler(async (req: any, res:Response) => {
+
+    const leads = await leadService.getLeadsOfSalesPerson(req.user?.id, req.query)
+    res.status(200).json(leads)
+
+})
+
 export const getLeadById = expressAsyncHandler(async (req: Request, res: Response) => {
 
     const { id } = req.params;

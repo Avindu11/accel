@@ -12,9 +12,10 @@ import Leads from "./views/sales/Leads";
 import AddLead from "./views/sales/AddLead";
 import ViewLead from "./views/sales/ViewLead";
 import EditLead from "./views/sales/EditLead";
+import AddNote from "./views/sales/AddNote";
+import EditNote from "./views/sales/EditNote";
 
 function App() {
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -66,13 +67,21 @@ function App() {
           path: "leads/edit/:id",
           element: <EditLead />,
         },
+        {
+          path: "add-note",
+          element: <AddNote />,
+        },
+        {
+          path: "edit-note/:id",
+          element: <EditNote />,
+        },
       ],
     },
   ]);
 
   return (
     <>
-        <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </>
   );
 }

@@ -26,6 +26,12 @@ function SalesLayout() {
               >
                 Leads
               </Link>
+              <Link
+                to="add-note"
+                className="flex-1 md:flex-none px-3 py-2 text-sm font-medium text-gray-700 bg-transparent hover:bg-orange-50 hover:text-orange-700 rounded-md transition-colors whitespace-nowrap text-left"
+              >
+                Add Note
+              </Link>
             </div>
           </div>
 

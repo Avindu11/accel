@@ -21,7 +21,7 @@ function Leads() {
   async function fetchLeads() {
     try {
       const api = axiosInstance(accessToken);
-      const res = await api.get(`/v1/leads?search=${params.search}&searchBy=${params.searchBy}&source=${params.source}&status=${params.status}`);
+      const res = await api.get(`/v1/leads/sales-person?search=${params.search}&searchBy=${params.searchBy}&source=${params.source}&status=${params.status}`);
 
       if (res.status === 200) {
         setFetchedLeads(() => res.data);
