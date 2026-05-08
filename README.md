@@ -1,8 +1,11 @@
 # Project Overview
 
-Accel is a multi-user (sales persons) CRM system managed by an admin or even can be managed by several admin. Accel is designed to ease the process of managing leads by sales persons. The admins of Accel can view and track each leads managed by each sales person
+## Accel CRM
 
-# Tech Stack
+Accel is a multi-user CRM system designed to streamline lead management for sales teams.
+It allows sales persons to manage their leads efficiently while enabling admins to monitor, track, and analyze sales activities across the organization.
+
+## Tech Stack
 Frontend
 - React.js
 - Tailwindcss
@@ -18,21 +21,22 @@ Database
 Authentication
 - Passport JWT
 
-# Features Implemented
+## Features Implemented
 
-User (sales person)
-- Sign In
-- Add Leads
-- View / Search & Filter Leads
-- Update Leads
-- Delete Leads
-- Dashboard (summary of individual user)
+### User (sales person)
+    - Sign In and Authentication
+    - Add New Leads
+    - View Leads
+    - Search & Filter Leads
+    - Update Leads
+    - Delete Leads
+    - Personal Dashboard with Leads Summary
 
-Admin
-- All of User
-- Admin Dashboard (summary of all users)
+### Admin
+    - All of User
+    - Admin Dashboard (summary of all users)
 
-# How to run locally
+## How to run locally
 
 1 - Clone repository
 
@@ -56,7 +60,7 @@ VITE_BASE_URL=http://localhost:4100/api
     `cd/accel-ui`
     `npm run dev`
 
-# Environment Variables
+## Environment Variables
 
 `accel-api/.env.dev`
     ```
@@ -80,7 +84,7 @@ VITE_BASE_URL=http://localhost:4100/api
     VITE_BASE_URL=http://localhost:4100/api
     ```
 
-# Test Login credentials
+## Test Login credentials
 
 ```
     email: demo@admin.com
@@ -88,11 +92,11 @@ VITE_BASE_URL=http://localhost:4100/api
 
 ```
 
-# Database Setup
+## Database Setup
 
 Database creation and seeding is handled by Drizzle ORM. Please check for database credentials
 
-# Known Limitations
+## Known Limitations
 
 - Auth Limitations
     - No Refresh Token Logic
@@ -103,6 +107,15 @@ Database creation and seeding is handled by Drizzle ORM. Please check for databa
     - Can't add sales persons yet
     - No user management facility
 
-# Reflection
+## Reflection
 
-Building Accel provided valuable insights on my current skill levels, coding and problem-solving and also pin pointed which areas should I improve. Also, this is the first time building an API with typescript. 
+Building Accel helped improve my understanding of:
+
+    - Building scalable REST APIs using TypeScript
+    - Authentication using Passport JWT
+    - Structuring full-stack applications
+    - Working with Drizzle ORM and MySQL
+    - State management and protected routes in React
+    - Problem-solving and debugging real-world issues
+
+This project also highlighted areas where I can continue improving, especially in authentication architecture, production-level backend structure, and frontend reliability.
