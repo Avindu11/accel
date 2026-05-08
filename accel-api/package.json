@@ -8,7 +8,7 @@
   "main": "server.js",
   "scripts": {
     "db:migrate": "ts-node src/db/migrate.ts && drizzle-kit generate && drizzle-kit migrate && drizzle-kit push",
-    "dev": "ts-node src/db/migrate.ts && drizzle-kit generate && drizzle-kit migrate && drizzle-kit push && ts-node src/server.ts",
+    "dev": "ts-node src/db/migrate.ts && drizzle-kit generate && drizzle-kit migrate && drizzle-kit push && ts-node src/db/seed.ts && ts-node src/server.ts",
     "build": "tsc",
     "serve": "node dist/server.js"
   },
@@ -34,6 +34,7 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "drizzle-orm": "^0.45.2",
+    "drizzle-seed": "^0.3.1",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.3",
     "morgan": "^1.10.1",
