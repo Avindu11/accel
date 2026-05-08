@@ -1,0 +1,2 @@
+ALTER TABLE `leads` ADD `created_date` timestamp DEFAULT (now()) NOT NULL;--> statement-breakpoint
+ALTER TABLE `leads` ADD `last_updated_date` timestamp DEFAULT (now()) NOT NULL ON UPDATE CURRENT_TIMESTAMP;

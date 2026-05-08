@@ -1,6 +1,7 @@
 import { decimal, varchar } from "drizzle-orm/mysql-core";
 import { text } from "drizzle-orm/mysql-core";
 import { datetime } from "drizzle-orm/mysql-core";
+import { timestamp } from "drizzle-orm/mysql-core";
 import { boolean } from "drizzle-orm/mysql-core";
 import { mysqlEnum } from "drizzle-orm/mysql-core";
 import { int } from "drizzle-orm/mysql-core";
@@ -51,6 +52,8 @@ export const leadsTable = mysqlTable("leads", {
     salesPersonId: int("sales_person_id").notNull().references(() => salesPersonsTable.id),
     status: mysqlEnum("status", ["new", "contacted", "qualified", "proposal sent", "won", "lost"]).notNull(),
     estDealValue: decimal("est_deal_value", { precision: 10, scale: 2 }).notNull(),
+    createdDate: timestamp("created_date").defaultNow().notNull(),
+    lastUpdatedDate: timestamp("last_updated_date").defaultNow().onUpdateNow().notNull()
 })
 
 export const leadNotesTable = mysqlTable("lead_notes", {
@@ -61,4 +64,5 @@ export const leadNotesTable = mysqlTable("lead_notes", {
     }),
     content: text("content").notNull(),
     addedBy: int("added_by").notNull().references(() => usersTable.id),
+    createdDate: timestamp("created_date").defaultNow().notNull()
 })

@@ -1,0 +1,1 @@
+ALTER TABLE `lead_notes` ADD `created_date` timestamp DEFAULT (now()) NOT NULL;

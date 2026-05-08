@@ -37,6 +37,13 @@ function NoteItem({ item, onDelete }) {
           {item.users.firstName} {item.users.lastName}
         </span>
       </p>
+
+      <p className="text-xs text-gray-500 mt-2">
+        Added at:{" "}
+        <span className="font-medium text-gray-800">
+          { new Date(item.lead_notes.createdDate).toLocaleString() }
+        </span>
+      </p>
     </div>
   );
 }

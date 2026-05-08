@@ -5,6 +5,7 @@ import { axiosInstance } from "../../api/axiosInstance";
 import { leadSources, leadStatuses } from "../../constants/constants";
 import { ArrowLeft, Pen, Trash } from "lucide-react";
 import NoteItem from "../../components/NoteItem";
+import { toast } from "react-toastify";
 
 function ViewLead() {
   const { id } = useParams();
@@ -54,10 +55,30 @@ function ViewLead() {
       const api = axiosInstance(accessToken);
       const res = await api.get(`/v1/lead-notes/${id}`);
 
-      console.log(res);
-
       if (res.status === 200) {
         setLeadNotes(() => res.data);
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function handleDeleteNote(id) {
+    try {
+      const confirm = window.confirm(`Are you sure to delete this note?`);
+
+      if (confirm) {
+        const api = axiosInstance(accessToken);
+        const res = await api.delete(`/v1/lead-notes/${id}`);
+
+        if (res.status === 204) {
+          toast("Note deleted successfully");
+          setLeadNotes(() => [])
+          fetchLeadNotes();
+        } else {
+          toast(`Couldn't delete note`);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -230,11 +251,13 @@ function ViewLead() {
         <div className="mb-6 pb-4 flex gap-2 items-center">
           <h2 className="text-xl font-bold text-gray-900">Lead Notes</h2>
         </div>
-        {
-          leadNotes.map((leadNote) => (
-            <NoteItem key={leadNote.lead_notes.id} item={leadNote} />
-          ))
-        }
+        {leadNotes.map((leadNote) => (
+          <NoteItem
+            key={leadNote.lead_notes.id}
+            item={leadNote}
+            onDelete={handleDeleteNote}
+          />
+        ))}
       </div>
     </>
   );
