@@ -103,6 +103,11 @@ Database creation and seeding is handled by Drizzle ORM. Please check for databa
 - Admin Limitations
     - Can't add sales persons yet
     - No user management facility
+
+## DEMO Video URL
+
+[Project Demonstration Video]: https://youtu.be/pUK554x_Lvc
+
 ## Reflection
 
 Building Accel helped improve my understanding of:
