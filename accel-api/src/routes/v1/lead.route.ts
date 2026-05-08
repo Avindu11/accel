@@ -9,6 +9,7 @@ router.get('/', authenticate(), authorize('admin'), leadController.getLeads)
 router.post('/', authenticate(), leadController.addLead)
 
 router.get('/sales-person', authenticate(), leadController.getLeadsOfSalesPerson)
+router.get('/sales-person/summary', authenticate(), leadController.getLeadsSummaryOfSalesPerson)
 
 router.get('/:id',  authenticate(), leadController.getLeadById)
 router.put('/:id', authenticate(), leadController.updateLead)
