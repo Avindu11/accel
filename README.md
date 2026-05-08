@@ -47,12 +47,15 @@ VITE_BASE_URL=http://localhost:4100/api
 5. open terminal (backend) and run:
 
     `cd/accel-api`
+    `npm i`
     `npm run dev`
     
 6. open another terminal (frontend) and run:
 
     `cd/accel-ui`
+    `npm i`
     `npm run dev`
+
 ## Environment Variables
 
 `accel-api/.env.dev`

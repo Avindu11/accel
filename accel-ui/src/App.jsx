@@ -15,6 +15,8 @@ import EditLead from "./views/sales/EditLead";
 import AddNote from "./views/sales/AddNote";
 import EditNote from "./views/sales/EditNote";
 import AdminLeads from "./views/admin/AdminLeads";
+import NotFound from "./views/common/NotFound";
+import Forbidden from "./views/common/Forbidden";
 
 function App() {
   const router = createBrowserRouter([
@@ -25,10 +27,6 @@ function App() {
     {
       path: "login",
       element: <SignIn />,
-    },
-    {
-      path: "forbidden",
-      element: <p>Forbidden</p>,
     },
     {
       path: "admin",
@@ -79,6 +77,14 @@ function App() {
         },
       ],
     },
+    {
+      path: '*',
+      element: <NotFound/>
+    },
+    {
+      path: 'forbidden',
+      element: <Forbidden/>
+    }
   ]);
 
   return (

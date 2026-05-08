@@ -3,7 +3,6 @@ import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 
 function SalesLayout() {
-
   const { user, logout } = useAuth();
 
   // const [userInfo, setUserInfo] = useState({
@@ -48,6 +47,18 @@ function SalesLayout() {
               >
                 Add Note
               </Link>
+
+              {user.admin.status === 1 && (
+                <>
+                  <hr />
+                  <Link
+                    to="/admin"
+                    className="flex-1 md:flex-none px-3 py-2 text-sm font-bold text-gray-700 bg-transparent hover:bg-orange-50 hover:text-orange-700 rounded-md transition-colors whitespace-nowrap text-left"
+                  >
+                    Admin Mode
+                  </Link>
+                </>
+              )}
             </div>
           </div>
 
@@ -62,9 +73,7 @@ function SalesLayout() {
                   <span className="text-sm font-semibold text-gray-900">
                     {firstName} {lastName}
                   </span>
-                  <span className="text-xs text-gray-500">
-                    {email}
-                  </span>
+                  <span className="text-xs text-gray-500">{email}</span>
                 </div>
               </div>
 

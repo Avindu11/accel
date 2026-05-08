@@ -85,13 +85,13 @@ function AdminLeads() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <h1 className="text-2xl font-bold text-gray-900">Manage Leads</h1>
-        {/* <Link
-          to="add"
+        <Link
+          to="/sales/leads/add"
           className="flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-orange-500 hover:bg-orange-600 rounded-md transition-colors shadow-sm"
         >
           <Plus size={16} />
           Add Lead
-        </Link> */}
+        </Link>
       </div>
 
       <div className="bg-white p-4 rounded-lg border border-gray-200 flex flex-col xl:flex-row gap-4 justify-between">
