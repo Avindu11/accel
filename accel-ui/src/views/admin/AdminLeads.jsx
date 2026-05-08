@@ -206,7 +206,6 @@ function AdminLeads() {
                 <th className="px-4 py-3">Phone Number</th>
                 <th className="px-4 py-3">Est. Deal Value</th>
                 <th className="px-4 py-3">Status</th>
-                <th className="px-4 py-3">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -229,29 +228,6 @@ function AdminLeads() {
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                       {lead.status.toUpperCase()}
                     </span>
-                  </td>
-                  <td className="px-4 py-4 flex gap-2 justify-end">
-                    <Link
-                      to={`edit/${lead.id}`}
-                      className="p-1.5 text-gray-500 hover:text-orange-600 hover:bg-orange-50 rounded-md transition-colors"
-                      title="Edit"
-                    >
-                      <Pen size={18} />
-                    </Link>
-                    <button
-                      onClick={() => deleteLead(lead.id)}
-                      className="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
-                      title="Delete"
-                    >
-                      <Trash size={18} />
-                    </button>
-                    <Link
-                      to={`view/${lead.id}`}
-                      className="p-1.5 text-gray-500 hover:text-orange-600 hover:bg-orange-50 rounded-md transition-colors"
-                      title="Edit"
-                    >
-                      <Eye size={18} />
-                    </Link>
                   </td>
                 </tr>
               ))}

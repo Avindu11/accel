@@ -78,7 +78,7 @@ function App() {
       ],
     },
     {
-      path: '*',
+      path: '/*',
       element: <NotFound/>
     },
     {
