@@ -1,8 +1,24 @@
 import { Link, Outlet } from "react-router";
 import { useAuth } from "../context/AuthContext";
+import { useEffect, useState } from "react";
 
 function SalesLayout() {
-  const { user } = useAuth();
+
+  const { user, logout } = useAuth();
+
+  // const [userInfo, setUserInfo] = useState({
+  //   firstName: user?.user?.firstName || "U",
+  //   lastName: user?.user?.lastName || "",
+  //   email: user?.user?.email || "",
+  // });
+
+  const firstName = user?.user?.firstName;
+  const lastName = user?.user?.lastName;
+  const email = user?.user?.email;
+
+  async function handleLogout() {
+    await logout();
+  }
 
   return (
     <>
@@ -39,21 +55,21 @@ function SalesLayout() {
             <div className="flex flex-row items-center justify-between md:flex-col md:items-start md:gap-4">
               <div className="flex items-center gap-3">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-orange-100 text-sm font-bold text-orange-700">
-                  {user.user.firstName[0]}
+                  {firstName ? firstName[0] : "U"}
                 </div>
 
                 <div className="flex flex-col">
                   <span className="text-sm font-semibold text-gray-900">
-                    {user.user.firstName} {user.user.lastName}
+                    {firstName} {lastName}
                   </span>
                   <span className="text-xs text-gray-500">
-                    {user.user.email}
+                    {email}
                   </span>
                 </div>
               </div>
 
               <button
-                onClick={() => console.log("Logging out...")}
+                onClick={() => handleLogout()}
                 className="text-sm font-medium text-gray-500 hover:text-red-600 md:w-full md:text-left md:px-2 md:py-2 md:hover:bg-red-50 md:rounded-md transition-colors"
               >
                 Log out

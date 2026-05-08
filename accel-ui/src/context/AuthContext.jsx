@@ -53,9 +53,11 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("accel-auth", stringify);
         toast("Signed in successfully");
 
-        if(res.data.user.admin.status == 1) {
+        const user = res.data.user
+
+        if(res.data.user.admin?.status == 1) {
           return 'admin'
-        } else if (res.data.user.sales_person.status == 1) {
+        } else if (user.sales_person.status == 1) {
           return 'sales'
         } else {
           return 'forbidden'
@@ -84,6 +86,10 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("accel-auth");
     setUser(null);
     setAccessToken(null);
+  }
+
+  async function getUserInfo() {
+    
   }
 
   useEffect(() => {

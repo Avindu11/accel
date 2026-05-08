@@ -28,14 +28,14 @@ function SalesDashboard() {
   const financialStats = [
     {
       title: "Total Estimated Deal Value",
-      value: `Rs. ${summary.totalEstDealValue.toLocaleString()}`,
+      value: `Rs. ${summary.totalEstDealValue?.toLocaleString() || 0}`,
       icon: DollarSign,
       color: "text-indigo-600",
       bg: "bg-indigo-50",
     },
     {
       title: "Total Value of Won Deals",
-      value: `Rs. ${summary.totalValueWonDeals.toLocaleString()}`,
+      value: `Rs. ${summary.totalValueWonDeals?.toLocaleString() || 0}`,
       icon: TrendingUp,
       color: "text-green-600",
       bg: "bg-green-50",
@@ -45,35 +45,35 @@ function SalesDashboard() {
   const leadStats = [
     {
       title: "Total Leads",
-      value: summary.totalLeads,
+      value: summary.totalLeads || 0,
       icon: Users,
       color: "text-blue-600",
       bg: "bg-blue-50",
     },
     {
       title: "New Leads",
-      value: summary.newLeads,
+      value: summary.newLeads || 0,
       icon: UserPlus,
       color: "text-orange-500",
       bg: "bg-orange-50",
     },
     {
       title: "Qualified Leads",
-      value: summary.qualifiedLeads,
+      value: summary.qualifiedLeads || 0,
       icon: CheckCircle,
       color: "text-purple-600",
       bg: "bg-purple-50",
     },
     {
       title: "Won Leads",
-      value: summary.wonLeads,
+      value: summary.wonLeads || 0,
       icon: Trophy,
       color: "text-emerald-600",
       bg: "bg-emerald-50",
     },
     {
       title: "Lost Leads",
-      value: summary.lostLeads,
+      value: summary.lostLeads || 0,
       icon: XCircle,
       color: "text-red-600",
       bg: "bg-red-50",
